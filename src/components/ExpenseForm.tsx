@@ -21,8 +21,17 @@ const ExpenseForm = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
+    const newObj = {
+      description: data.description,
+      amount: data.amount,
+      category: data.category,
+    };
+
+    setExpenseList([newObj, ...expenseList]);
+    console.log(expenseList);
   };
+
+  const [expenseList, setExpenseList] = useState([]);
 
   return (
     <>
