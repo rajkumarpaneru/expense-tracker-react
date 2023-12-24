@@ -31,6 +31,10 @@ const ExpenseForm = () => {
     console.log(expenseList);
   };
 
+  const handleDelete = (index: Number) => {
+    console.log(index);
+  };
+
   const [expenseList, setExpenseList] = useState([]);
 
   return (
@@ -111,7 +115,14 @@ const ExpenseForm = () => {
               <td>{item.description}</td>
               <td>{item.amount}</td>
               <td>{item.category}</td>
-              <td></td>
+              <td>
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={handleDelete(index)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
