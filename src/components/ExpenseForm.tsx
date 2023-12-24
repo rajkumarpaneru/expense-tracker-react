@@ -94,6 +94,28 @@ const ExpenseForm = () => {
           Submit
         </button>
       </form>
+      <br />
+      <br />
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Category</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {expenseList.map((item, index) => (
+            <tr key={index}>
+              <td>{item.description}</td>
+              <td>{item.amount}</td>
+              <td>{item.category}</td>
+              <td></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };
