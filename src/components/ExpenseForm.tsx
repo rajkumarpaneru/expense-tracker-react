@@ -113,7 +113,7 @@ const ExpenseForm = () => {
           {expenseList.map((item, index) => (
             <tr key={index}>
               <td>{item.description}</td>
-              <td>{item.amount}</td>
+              <td>${item.amount}</td>
               <td>{item.category}</td>
               <td>
                 <button
