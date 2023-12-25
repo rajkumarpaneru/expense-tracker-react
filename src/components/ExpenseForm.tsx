@@ -37,6 +37,10 @@ const ExpenseForm = () => {
 
   const [expenseList, setExpenseList] = useState([]);
 
+  let total = expenseList.reduce((sum, expense) => {
+    return sum + expense.amount;
+  }, 0);
+
   return (
     <>
       <h2>My Expense Tracker</h2>
@@ -125,6 +129,12 @@ const ExpenseForm = () => {
               </td>
             </tr>
           ))}
+          <tr>
+            <td>Total</td>
+            <td>${total}</td>
+            <td></td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
     </>
