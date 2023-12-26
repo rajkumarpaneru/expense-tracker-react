@@ -7,7 +7,7 @@ const schema = z.object({
   description: z.string().min(1, { message: "Description is required." }),
   amount: z
     .number({ invalid_type_error: "Amount field is required." })
-    .min(0, { message: "Amount must be a positive number." }),
+    .min(0.01, { message: "Amount must be a positive number." }),
   category: z.string().min(1, { message: "Category is required." }),
 });
 
@@ -36,10 +36,6 @@ const ExpenseForm = () => {
   };
 
   const [expenseList, setExpenseList] = useState([]);
-
-  let total = expenseList.reduce((sum, expense) => {
-    return sum + expense.amount;
-  }, 0);
 
   return (
     <>
@@ -102,41 +98,6 @@ const ExpenseForm = () => {
           Submit
         </button>
       </form>
-      <br />
-      <br />
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Description</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Category</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {expenseList.map((item, index) => (
-            <tr key={index}>
-              <td>{item.description}</td>
-              <td>${item.amount}</td>
-              <td>{item.category}</td>
-              <td>
-                <button
-                  className="btn btn-outline-danger"
-                  onClick={handleDelete(index)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-          <tr>
-            <td>Total</td>
-            <td>${total}</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
     </>
   );
 };
