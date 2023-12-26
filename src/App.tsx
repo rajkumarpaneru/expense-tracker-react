@@ -1,12 +1,22 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
 import ExpenseForm from "./components/ExpenseForm";
+import ExpenseFilter from "./components/ExpenseFilter";
+import ExpenseList from "./components/ExpenseList";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [expenses, setExpenses] = useState([]);
 
-  return <ExpenseForm />;
+  return (
+    <>
+      <ExpenseForm />
+      <ExpenseFilter />
+      <ExpenseList
+        expenses={expenses}
+        onDelete={() => console.log("deleted")}
+      />
+    </>
+  );
 }
 
 export default App;
