@@ -2,6 +2,7 @@ import React, { FormEvent, useRef, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { categories } from "../App";
 
 const schema = z.object({
   description: z.string().min(1, { message: "Description is required." }),
@@ -81,12 +82,14 @@ const ExpenseForm = () => {
             {...register("category")}
             id="category"
             name="category"
-            className="form-control"
+            className="form-select"
           >
             <option value="All Categories">All Categories</option>
-            <option value="Groceries">Groceries</option>
-            <option value="Utilities">Utilities</option>
-            <option value="Entertainment">Entertainment</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </select>
 
           {errors.category && (
