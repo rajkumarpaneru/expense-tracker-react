@@ -2,14 +2,16 @@ import React, { FormEvent, useRef, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { categories } from "../App";
+import categories from "../categories";
 
 const schema = z.object({
   description: z.string().min(1, { message: "Description is required." }),
   amount: z
     .number({ invalid_type_error: "Amount field is required." })
     .min(0.01, { message: "Amount must be a positive number." }),
-  category: z.string().min(1, { message: "Category is required." }),
+  category: z.enum(categories, {
+    errorMap: () => ({ message: "Category is required." }),
+  }),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -21,28 +23,11 @@ const ExpenseForm = () => {
     formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const onSubmit = (data: FieldValues) => {
-    const newObj = {
-      description: data.description,
-      amount: data.amount,
-      category: data.category,
-    };
-
-    setExpenseList([newObj, ...expenseList]);
-    console.log(expenseList);
-  };
-
-  const handleDelete = (index: Number) => {
-    console.log(index);
-  };
-
-  const [expenseList, setExpenseList] = useState([]);
-
   return (
     <>
       <h2>My Expense Tracker</h2>
       <hr />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit((data) => console.log(data))}>
         <div className="mb-3">
           <label htmlFor="description" className="form-label">
             Description
